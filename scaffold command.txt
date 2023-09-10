@@ -1,0 +1,30 @@
+Add Connection String =>
+  "ConnectionStrings": {
+    "RevisionTool": "Server=localhost;Database=revision_tool;Uid=root;Pwd=doomsday"
+  },
+
+Packages to install =>
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Pomelo.EntityFrameworkCore.MySql
+
+Install & Update dotnet EF tool =>
+dotnet tool install --global dotnet-ef
+dotnet tool update --global dotnet-ef
+
+Scaffold MySQL Database =>
+dotnet ef dbcontext scaffold Name=revisionTool Pomelo.EntityFrameworkCore.MySql --output-dir Entity --context-dir Data --namespace RevisionTool.Entity --context-namespace RevisionTool.Data --context RevisionToolContext -f --no-onconfiguring
+
+dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
+
+builder.Services.AddMvc(option => option.EnableEndpointRouting = false)
+    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+builder.Services.AddDbContext<RevisionToolContext>(
+options =>
+{
+    options.UseMySql(builder.Configuration.GetConnectionString("revisionTool"),
+    Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.34-mysql"));
+});
+
+

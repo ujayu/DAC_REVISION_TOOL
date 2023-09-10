@@ -1,0 +1,19 @@
+/* Home.css */
+.home-container {
+    background-image: url('student.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Set a minimum height to ensure the background covers the entire viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Additional styling for the content inside */
+  .home-content {
+    text-align: center;
+    color: white;
+  }
+  
